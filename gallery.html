@@ -1,0 +1,73 @@
+<html>
+<head>
+    <title>Gallery</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .bg {
+            /*margin-right: 57px;*/
+
+            background-color: black;
+
+            /* The image used */
+            background-image: url("http://app.baranddvirwedding.com/images/");
+            image-orientation: from-image;
+
+
+            /* Full height */
+            height: 100vh;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+    </style>
+    <script>
+    	function updateTXT()
+    	{
+    		$.ajax({
+    		url: "createTxt.php",
+    		success: function(){
+    		        jQuery.get('imagesNames.txt', function (data) {		
+	                var newData = data.toString();
+	                lines = newData.split("\\n");
+        	        numLines = lines.length;
+	       	        i=0;
+		        });
+    		}
+		});
+	}
+    
+    
+        var i = 0;
+        var lines;
+        var numLines;
+	updateTXT();
+        function loop() {
+            setTimeout(function () {
+                $("#bg").css({'background-image': 'url("http://app.baranddvirwedding.com/images/' + lines[i] + '")'});
+                i++;
+                if(i<numLines)
+                {
+                    loop();
+                }
+                else if (i==numLines)
+                {
+			updateTXT();
+		        loop();
+                }
+            }, 5000)
+        }
+        loop();
+
+    </script>
+</head>
+<body>
+<div id="bg" class="bg"></div>
+</body>
+</html>
