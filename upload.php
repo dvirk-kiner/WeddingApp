@@ -1,7 +1,7 @@
 <?php
 
-error_reporting(1);
-ini_set('display_errors', 1);
+// error_reporting(1);
+// ini_set('display_errors', 1);
 
 function compress_image($source_url, $destination_url, $quality) {
 
